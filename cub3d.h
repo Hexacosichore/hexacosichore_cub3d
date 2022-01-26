@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 00:46:46 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/22 06:27:23 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/27 00:53:59 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,116 @@
 # define PI 3.14159265
 # define WIN_L 1280
 # define WIN_H 720
+# define ANGLE ((PI / 4) / WIN_L)
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
+# define SHIFT 257
 
 # include "minilibx/mlx.h"
 # include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 //struct
+typedef struct s_vect2f
+{
+	float	x;
+	float	y;
+}				t_vect2f;
+
+typedef struct s_press
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+	int	shift;
+}				t_press;
+
+typedef struct s_plot_line
+{
+	int	dx;
+	int	sx;
+	int	dy;
+	int	sy;
+	int	err;
+	int	e2;
+}				t_plot_line;
+
 typedef struct s_cub3d
 {
-	char	*file;
-	int		*map;
-	int		width_map;
-	int		height_map;
-	int		*ntexture;
-	int		*stexture;
-	int		*wtexture;
-	int		*etexture;
-	int		*ftexture;
-	int		*ctexture;
-	int		okay_we_have_everything;
-	void	*mlx;
-	void	*mlx_win;
-	void	*mlx_img;
+	char		*file;
+	int			*map;
+	int			width_map;
+	int			height_map;
+	int			*ntexture;
+	int			*stexture;
+	int			*wtexture;
+	int			*etexture;
+	int			*ftexture;
+	int			*ctexture;
+	int			okay_we_have_everything;
+	void		*mlx;
+	void		*mlx_win;
+	void		*mlx_img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	float		speed;
+	float		sensi;
+	t_vect2f	player;
+	float		p_angle;
+	t_vect2f	d_angle;
+	t_press		is_press;
+	int			started;
 }				t_cub3d;
 
 //checking
-void	ft_isvalidid(char *line, t_cub3d *cub3d);
-void	check_extention(char *file, char *extention);
-void	check_identifier(char *line, t_cub3d *cub3d);
-void	map_checker(t_cub3d *cub3d);
-void	verify_north(t_cub3d *cub3d, int i);
-void	verify_south(t_cub3d *cub3d, int i);
-void	verify_west(t_cub3d *cub3d, int i);
-void	verify_east(t_cub3d *cub3d, int i);
+void		ft_isvalidid(char *line, t_cub3d *cub3d);
+void		check_extention(char *file, char *extention);
+void		check_identifier(char *line, t_cub3d *cub3d);
+void		map_checker(t_cub3d *cub3d);
+void		verify_north(t_cub3d *cub3d, int i);
+void		verify_south(t_cub3d *cub3d, int i);
+void		verify_west(t_cub3d *cub3d, int i);
+void		verify_east(t_cub3d *cub3d, int i);
 
 //parsing
-void	init_parsing(char *file, t_cub3d *cub3d);
-void	init_map(char *line, t_cub3d *cub3d, int fd, int i);
-void	init_texture(char *line, t_cub3d *cub3d);
-void	init_malloc(t_cub3d *d);
+void		init_parsing(char *file, t_cub3d *cub3d);
+void		init_map(char *line, t_cub3d *cub3d, int fd, int i);
+void		init_texture(char *line, t_cub3d *cub3d);
+void		init_malloc(t_cub3d *d);
 
 //ray_casting
-void	init_ray_casting(t_cub3d *cub3d);
+void		init_ray_casting(t_cub3d *cub3d);
+void		my_mlx_pixel_put(t_cub3d *d, int x, int y, int color);
+void		draw_rectangle(t_cub3d *cub3d, t_vect2f cd, int size, int color);
+void		ft_draw(t_cub3d *cub3d);
+int			ft_draw_modif(t_cub3d *cub3d);
+int			ft_key_press(int keycode, t_cub3d *cub3d);
+int			ft_key_release(int keycode, t_cub3d *cub3d);
+void		actualize_player(t_cub3d *cub3d);
+int			ft_exit(t_cub3d *cub3d);
+void		draw_rays(t_cub3d *cub3d, int nbr_rays, int i);
+
+//maths
+float		dist(t_vect2f pt0, t_vect2f pt1);
+t_vect2f	newvect2f(float x, float y);
+float		radToDeg(float rad);
+float		degToRad(float deg);
 
 //leaving
-void	ft_leave(t_cub3d *cub3d);
-void	ft_error(char *msg, int mode, t_cub3d *cub3d);
+void		ft_leave(t_cub3d *cub3d);
+void		ft_error(char *msg, int mode, t_cub3d *cub3d);
 
 #endif

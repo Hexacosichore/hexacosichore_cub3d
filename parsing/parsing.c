@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 03:47:47 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/22 03:48:02 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/23 02:37:14 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	find_biggest_line(t_cub3d *cub3d)
 		line = get_next_line(fd);
 		cub3d->height_map++;
 	}
+	ft_strdel(&line);
 	cub3d->width_map = biggest;
 }
 
