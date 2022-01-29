@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 03:08:05 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/25 04:22:33 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/28 12:32:04 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,11 @@ t_vect2f	newvect2f(float x, float y)
 	return (coord);
 }
 
-float	dist(t_vect2f pt0, t_vect2f pt1)
+t_vect2i	newvect2i(int x, int y)
 {
-	return (sqrtf(powf(pt1.x - pt0.x, 2) + powf(pt1.y - pt0.y, 2)));
-}
+	t_vect2i	coord;
 
-float	radToDeg(float rad)
-{
-	return (rad * 180 / PI);
-}
-
-float	degToRad(float deg)
-{
-	return (deg * PI / 180);
+	coord.x = x;
+	coord.y = y;
+	return (coord);
 }

@@ -6,7 +6,7 @@
 #    By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:07:22 by kbarbry           #+#    #+#              #
-#    Updated: 2022/01/25 04:40:45 by kbarbry          ###   ########.fr        #
+#    Updated: 2022/01/29 17:48:12 by kbarbry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC_CAST	=	start.c \
 				drawing2.c \
 				key_hook.c \
 				ray_utils.c \
-				maths_utils.c
+				maths_utils.c \
+				minilib_utils.c
 
 OBJ			=	${SRC_ENTRY:.c=.o} \
 				${addprefix parsing/checking/,	${SRC_CHECK:.c=.o}} \
@@ -41,7 +42,7 @@ OBJ			=	${SRC_ENTRY:.c=.o} \
 				${addprefix ray_casting/,		${SRC_CAST:.c=.o}}
 
 CC			=	gcc
-FLAGS		=	-Iinclude -ggdb3
+FLAGS		=	-Iinclude -O3 -Wall -Werror -Wextra
 FLAGS_MLX	=	-L minilibx -lmlx -framework OpenGL -framework Appkit
 FLAGS_LIB	=	-lreadline -lncurses
 FLAGS_LIBFT	=	-Llibft -lft

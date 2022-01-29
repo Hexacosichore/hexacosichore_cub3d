@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 01:13:02 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/26 22:48:20 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/29 17:39:06 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void	draw_rectangle(t_cub3d *cub3d, t_vect2f cd, int size, int color)
 	{
 		while (j < size)
 		{
-			if (i == 0 || i == size || j == 0 || j == size)
-				my_mlx_pixel_put(cub3d, (int)(cd.x + i), (int)(cd.y + j), 0x000000);
-			else
-				my_mlx_pixel_put(cub3d, (int)(cd.x + i), (int)(cd.y + j), color);
+			my_mlx_pixel_put(cub3d, (int)(cd.x + i), (int)(cd.y + j), color);
 			j++;
 		}
 		j = 0;
@@ -40,14 +37,12 @@ void	draw_map(t_cub3d *cub3d, int i)
 
 	while (i < cub3d->height_map * cub3d->width_map)
 	{
-		coord.x = (float)(i % cub3d->width_map * 20);
-		coord.y = (float)(i / cub3d->width_map * 20);
+		coord.x = (float)(i % cub3d->width_map * 5);
+		coord.y = (float)(i / cub3d->width_map * 5);
 		if (cub3d->map[i] == 0)
-			draw_rectangle(cub3d, coord, 20, 0x00FF0000);
+			draw_rectangle(cub3d, coord, 5, 0xF059007C);
 		if (cub3d->map[i] == 1)
-			draw_rectangle(cub3d, coord, 20, 0x0000FF00);
-		if (cub3d->map[i] == 10)
-			draw_rectangle(cub3d, coord, 20, 0x000000FF);
+			draw_rectangle(cub3d, coord, 5, 0xF0FFFFFF - cub3d->ctexture[0]);
 		i++;
 	}
 }
@@ -56,19 +51,19 @@ void	draw_player(t_cub3d *cub3d)
 {
 	t_vect2f	coord;
 
-	coord.x = cub3d->player.x * 20.0f;
-	coord.y = cub3d->player.y * 20.0f;
-	draw_rectangle(cub3d, coord, 5, 0x00FF00FF);
-	coord.x = coord.x + cub3d->d_angle.x * 8;
-	coord.y = coord.y - cub3d->d_angle.y * 8;
-	draw_rectangle(cub3d, coord, 4, 0x00FF00FF);
+	coord.x = cub3d->player.x * 5.0f - 3;
+	coord.y = cub3d->player.y * 5.0f - 3;
+	draw_rectangle(cub3d, coord, 3, 0x00FF0000);
+	coord.x += cub3d->dir.x * 4;
+	coord.y += cub3d->dir.y * 4;
+	draw_rectangle(cub3d, coord, 2, 0x00FF0000);
 }
 
 void	ft_draw(t_cub3d *cub3d)
 {
+	draw_rays(cub3d, WIN_L, -1);
 	draw_map(cub3d, 0);
 	draw_player(cub3d);
-	draw_rays(cub3d, WIN_L, -1);
 }
 
 int	ft_draw_modif(t_cub3d *cub3d)

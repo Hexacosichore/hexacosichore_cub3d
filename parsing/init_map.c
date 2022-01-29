@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 07:25:59 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/22 04:12:11 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/27 03:31:45 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ static void	map_content(char pos, t_cub3d *cub3d, int i)
 		cub3d->map[i] = 10;
 	else
 		cub3d->map[i] = pos - 48;
+}
+
+void	init_malloc(t_cub3d *d)
+{
+	d->ntexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
+	d->stexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
+	d->wtexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
+	d->etexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
+	d->ftexture = (int *)ft_calloc(3, sizeof(int));
+	d->ctexture = (int *)ft_calloc(3, sizeof(int));
+	d->map = NULL;
+	if (!d->ntexture || !d->stexture || !d->wtexture || !d->etexture
+		|| !d->ftexture || !d->ctexture)
+		ft_error("Malloc error.", 1, d);
 }
 
 void	init_map(char *line, t_cub3d *cub3d, int fd, int i)

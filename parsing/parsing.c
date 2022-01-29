@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 03:47:47 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/23 02:37:14 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/27 06:40:35 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static void	find_biggest_line(t_cub3d *cub3d)
 		cub3d->height_map++;
 	}
 	ft_strdel(&line);
+	if (close(fd) < 0)
+		ft_error("Close error.", 1, cub3d);
 	cub3d->width_map = biggest;
 }
 
@@ -94,6 +96,8 @@ void	init_parsing(char *file, t_cub3d *cub3d)
 
 	cub3d->file = file;
 	cub3d->okay_we_have_everything = 0;
+	cub3d->fov = 0.66;
+	cub3d->sensi = 0.04f;
 	init_malloc(cub3d);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -110,4 +114,5 @@ void	init_parsing(char *file, t_cub3d *cub3d)
 		ft_error("file.cub doesn't have all the infos needed.", 1, cub3d);
 	if (close(fd) < 0)
 		ft_error("Close error.", 1, cub3d);
+	convert_to_color(cub3d);
 }

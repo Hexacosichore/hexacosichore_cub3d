@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 06:04:40 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/26 23:40:25 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/28 13:24:33 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_ray_casting(t_cub3d *cub3d)
 {
-	cub3d->sensi = 0.04f;
 	cub3d->mlx = mlx_init();
 	cub3d->mlx_win = mlx_new_window(cub3d->mlx, WIN_L, WIN_H, "Cub3D");
 	cub3d->mlx_img = mlx_new_image(cub3d->mlx, WIN_L, WIN_H);

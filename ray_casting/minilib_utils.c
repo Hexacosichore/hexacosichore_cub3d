@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minilib_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/21 00:46:35 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/29 17:03:49 by kbarbry          ###   ########.fr       */
+/*   Created: 2022/01/29 16:09:44 by kbarbry           #+#    #+#             */
+/*   Updated: 2022/01/29 16:10:37 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	main(int ac, char **av)
+void	my_mlx_pixel_put(t_cub3d *d, int x, int y, int color)
 {
-	t_cub3d	cub3d;
+	char	*dst;
 
-	if (ac != 2)
-		ft_error("Use: ./cub3d file.cub", 0, &cub3d);
-	check_extention(av[1], ".cub");
-	init_parsing(av[1], &cub3d);
-	init_ray_casting(&cub3d);
-	ft_leave(&cub3d);
+	if (x < 0 || y < 0 || x > WIN_L - 1 || y > WIN_H - 1)
+		return ;
+	dst = d->addr + (y * d->line_length + x * (d->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }

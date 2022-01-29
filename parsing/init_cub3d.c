@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 05:16:37 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/21 08:07:53 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/29 16:06:12 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@ static void	init_wall(char *line, t_cub3d *cub3d, int fd, int i)
 		ft_error("Texture must be 32x32 RGB value.", 1, cub3d);
 	if (close(fd) < 0)
 		ft_error("Close error.", 1, cub3d);
+}
+
+void	convert_to_color(t_cub3d *c)
+{
+	int	f;
+	int	u;
+
+	f = (0 << 24 | c->ftexture[0] << 16 | c->ftexture[1] << 8 | c->ftexture[2]);
+	c->ftexture[0] = f;
+	u = (0 << 24 | c->ctexture[0] << 16 | c->ctexture[1] << 8 | c->ctexture[2]);
+	c->ctexture[0] = u;
 }
 
 static void	init_floor_ceiling(char *line, t_cub3d *cub3d, int i)
@@ -107,18 +118,4 @@ void	init_texture(char *line, t_cub3d *cub3d)
 	}
 	else
 		init_floor_ceiling(line, cub3d, 1);
-}
-
-void	init_malloc(t_cub3d *d)
-{
-	d->ntexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
-	d->stexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
-	d->wtexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
-	d->etexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
-	d->ftexture = (int *)ft_calloc(3, sizeof(int));
-	d->ctexture = (int *)ft_calloc(3, sizeof(int));
-	d->map = NULL;
-	if (!d->ntexture || !d->stexture || !d->wtexture || !d->etexture
-		|| !d->ftexture || !d->ctexture)
-		ft_error("Malloc error.", 1, d);
 }

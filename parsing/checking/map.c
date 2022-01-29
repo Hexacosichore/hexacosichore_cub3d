@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 01:39:57 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/25 08:14:27 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/27 05:44:10 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,25 @@ static void	init_pos_player(int i, t_cub3d *cub3d)
 	cub3d->player.y = (float)(i / cub3d->width_map + 0.5);
 	cub3d->player.x = (float)(i % cub3d->width_map + 0.5);
 	if (cub3d->map[i] == 11)
-		cub3d->p_angle = PI / 2;
+	{
+		cub3d->dir = newvect2f(0, -1);
+		cub3d->cam = newvect2f(cub3d->fov, 0);
+	}
 	if (cub3d->map[i] == 12)
-		cub3d->p_angle = 3 * PI / 2;
+	{
+		cub3d->dir = newvect2f(0, 1);
+		cub3d->cam = newvect2f(-cub3d->fov, 0);
+	}
 	if (cub3d->map[i] == 13)
-		cub3d->p_angle = PI;
+	{
+		cub3d->dir = newvect2f(-1, 0);
+		cub3d->cam = newvect2f(0, -cub3d->fov);
+	}
 	if (cub3d->map[i] == 14)
-		cub3d->p_angle = 0;
+	{
+		cub3d->dir = newvect2f(1, 0);
+		cub3d->cam = newvect2f(0, cub3d->fov);
+	}
 	cub3d->map[i] = 0;
 }
 
