@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 07:25:59 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/27 03:31:45 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/30 17:12:07 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ static void	map_content(char pos, t_cub3d *cub3d, int i)
 		cub3d->map[i] = pos - 48;
 }
 
+static void	init_is_press(t_cub3d *c)
+{
+	c->is_press.w = 0;
+	c->is_press.a = 0;
+	c->is_press.s = 0;
+	c->is_press.d = 0;
+	c->is_press.shift = 0;
+	c->is_press.left = 0;
+	c->is_press.right = 0;
+	c->is_press.up = 0;
+	c->is_press.down = 0;
+	c->is_press.tab = 0;
+	c->is_press.q = 0;
+	c->is_press.e = 0;
+}
+
 void	init_malloc(t_cub3d *d)
 {
 	d->ntexture = (int *)ft_calloc(32 * 32 * 3, sizeof(int));
@@ -58,6 +74,7 @@ void	init_malloc(t_cub3d *d)
 	if (!d->ntexture || !d->stexture || !d->wtexture || !d->etexture
 		|| !d->ftexture || !d->ctexture)
 		ft_error("Malloc error.", 1, d);
+	init_is_press(d);
 }
 
 void	init_map(char *line, t_cub3d *cub3d, int fd, int i)

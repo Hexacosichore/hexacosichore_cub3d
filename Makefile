@@ -6,7 +6,7 @@
 #    By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/21 01:07:22 by kbarbry           #+#    #+#              #
-#    Updated: 2022/01/29 17:48:12 by kbarbry          ###   ########.fr        #
+#    Updated: 2022/01/30 12:29:09 by kbarbry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_PARSING	=	parsing.c \
 				init_map.c
 SRC_CAST	=	start.c \
 				drawing.c \
-				drawing2.c \
+				actualize.c \
 				key_hook.c \
 				ray_utils.c \
 				maths_utils.c \

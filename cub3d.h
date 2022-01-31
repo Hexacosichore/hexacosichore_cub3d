@@ -6,22 +6,26 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 00:46:46 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/29 17:48:48 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/31 18:33:21 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define WIN_L 1920
-# define WIN_H 1080
+# define WIN_L 1600
+# define WIN_H 900
 # define ESC 53
 # define W 13
 # define A 0
 # define S 1
 # define D 2
+# define Q 12
+# define E 14
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
+# define DOWN_ARROW 125
+# define UP_ARROW 126
 # define SHIFT 257
 # define TAB 48
 
@@ -53,7 +57,12 @@ typedef struct s_press
 	int	d;
 	int	left;
 	int	right;
+	int	down;
+	int	up;
 	int	shift;
+	int	tab;
+	int	q;
+	int	e;
 }				t_press;
 
 typedef struct s_rays
@@ -100,6 +109,8 @@ typedef struct s_cub3d
 	t_vect2f	player;
 	t_vect2f	dir;
 	t_vect2f	cam;
+	int			offset;
+	int			help_offset;
 	float		fov;
 	t_press		is_press;
 	int			started;
@@ -133,6 +144,7 @@ int			ft_key_release(int keycode, t_cub3d *cub3d);
 void		actualize_player(t_cub3d *cub3d);
 int			ft_exit(t_cub3d *cub3d);
 void		draw_rays(t_cub3d *cub3d, int nbr_rays, int i);
+void		turn_with_mouse(t_cub3d *cub3d);
 
 //maths
 void		convert_to_color(t_cub3d *c);

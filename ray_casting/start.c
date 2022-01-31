@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 06:04:40 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/28 13:24:33 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/31 17:53:06 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_ray_casting(t_cub3d *cub3d)
 	cub3d->addr = mlx_get_data_addr(cub3d->mlx_img, &cub3d->bits_per_pixel,
 			&cub3d->line_length, &cub3d->endian);
 	mlx_mouse_hide();
+	mlx_mouse_move(cub3d->mlx_win, WIN_L / 2, WIN_H / 2);
 	mlx_hook(cub3d->mlx_win, 17, 1L << 17, ft_exit, cub3d);
 	mlx_hook(cub3d->mlx_win, 2, 1L << 0, ft_key_press, cub3d);
 	mlx_loop_hook(cub3d->mlx, ft_draw_modif, cub3d);

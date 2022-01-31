@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 03:47:47 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/27 06:40:35 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/31 18:50:00 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ void	init_parsing(char *file, t_cub3d *cub3d)
 	cub3d->file = file;
 	cub3d->okay_we_have_everything = 0;
 	cub3d->fov = 0.66;
-	cub3d->sensi = 0.04f;
+	cub3d->sensi = 0.05f;
+	cub3d->offset = 0;
+	cub3d->help_offset = -205;
 	init_malloc(cub3d);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)

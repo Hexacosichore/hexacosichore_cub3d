@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 23:14:15 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/29 18:11:52 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/30 12:36:10 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	draw_vline(t_cub3d *c, t_rays *rays, int x)
 		color = 0x00FFFFFF;
 	else
 		color = 0x00999999;
-	while (++i < rays->start)
+	while (++i < rays->start - c->offset * 4)
 		my_mlx_pixel_put(c, x, i, c->ctexture[0]);
-	while (++i < rays->stop)
+	while (++i < rays->stop - c->offset * 4)
 		my_mlx_pixel_put(c, x, i, color);
 	while (++i < WIN_H)
 		my_mlx_pixel_put(c, x, i, c->ftexture[0]);

@@ -6,7 +6,7 @@
 /*   By: kbarbry <kbarbry@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 01:16:49 by kbarbry           #+#    #+#             */
-/*   Updated: 2022/01/28 13:32:54 by kbarbry          ###   ########.fr       */
+/*   Updated: 2022/01/31 18:33:58 by kbarbry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ int	ft_key_press(int keycode, t_cub3d *cub3d)
 		cub3d->is_press.left = 1;
 	if (keycode == RIGHT_ARROW)
 		cub3d->is_press.right = 1;
+	if (keycode == DOWN_ARROW)
+		cub3d->is_press.down = 1;
+	if (keycode == UP_ARROW)
+		cub3d->is_press.up = 1;
+	if (keycode == TAB)
+		cub3d->is_press.tab = 1;
 	return (0);
 }
 
@@ -49,6 +55,12 @@ int	ft_key_release(int keycode, t_cub3d *cub3d)
 		cub3d->is_press.left = 0;
 	if (keycode == RIGHT_ARROW)
 		cub3d->is_press.right = 0;
+	if (keycode == DOWN_ARROW)
+		cub3d->is_press.down = 0;
+	if (keycode == UP_ARROW)
+		cub3d->is_press.up = 0;
+	if (keycode == TAB)
+		cub3d->is_press.tab = 0;
 	return (0);
 }
 
